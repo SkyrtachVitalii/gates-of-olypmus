@@ -1,0 +1,191 @@
+@use "../animations/scaling";
+
+.mainContent {
+  flex: 1 1 auto;
+  min-height: 0;
+  position: relative;
+  z-index: 6;
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+  &__gameInfo {
+    width: clamp(242px, calc(10.256vw + 205.077px), 402px);
+  }
+  &__gameInfoShadow {
+    display: none;
+  }
+  &__gameInfoContainer {
+    margin-bottom: 10vh;
+  }
+  &__gameInfoImg {
+    & img {
+      width: clamp(89px, calc(8.333vw + 59px), 219px);
+      aspect-ratio: 92/71;
+    }
+  }
+  &__gameInfoText {
+    font-size: clamp(40px, calc(1.795vw + 33.54px), 68px);
+    font-style: normal;
+    font-weight: 900;
+    line-height: 110%;
+    text-transform: uppercase;
+  }
+  &__gameInfoTextGameName {
+    background: linear-gradient(92deg, #f0b241 10.13%, #ffe7a6 97.74%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: clamp(40px, calc(1.795vw + 33.54px), 68px);
+    font-style: normal;
+    line-height: 110%;
+    text-transform: uppercase;
+  }
+  &__game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  &__btn {
+    display: flex;
+    inline-size: clamp(260px, calc(20.5 * var(--vw-freeze-1100)), 445px);
+    block-size: clamp(44px, calc(6 * var(--vw-freeze-1100)), 66px);
+    margin: 61px auto 0;
+    padding-block: 0;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    width: 445px;
+    height: 66px;
+    border-radius: 6px;
+    background: #e5ff3a;
+    color: #2a2e0a;
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1;
+    transition: transform 0.3s ease, background-color 0.2s ease, color 0.2s ease;
+    animation: scaling 1s linear infinite alternate;
+    will-change: transform; /* підказка браузеру для кращої продуктивності */
+    &:hover {
+      transform: scale(1.06);
+    }
+    &:active {
+      background: #d1ec26;
+      color: #14141a;
+    }
+    &[aria-disabled="true"] {
+      pointer-events: none;
+    }
+  }
+}
+
+/* Дбайливо до користувачів з вимкненою анімацією */
+@media (prefers-reduced-motion: reduce) {
+  .mainContent {
+    &__btn {
+      animation: none;
+    }
+  }
+}
+
+@media (max-width: 1023px) {
+  .mainContent {
+    &__container {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+    &__gameInfo {
+      transform: translateX(-40%);
+    }
+    &__gameInfoContainer {
+      margin-bottom: 0;
+    }
+    &__btn {
+      margin: 16px auto 0;
+    }
+  }
+}
+
+// @media (max-width: 576px) and (max-height: 1100px) {
+//   .mainContent {
+//     &__container {
+//       padding-top: 50%;
+//     }
+//   }
+// }
+// @media (max-width: 576px) and (max-height: 1000px) {
+//   .mainContent {
+//     &__container {
+//       padding-top: 40%;
+//     }
+//   }
+// }
+// @media (max-width: 576px) and (max-height: 900px) {
+//   .mainContent {
+//     &__container {
+//       padding-top: 30%;
+//     }
+//   }
+// }
+// @media (max-width: 576px) and (max-height: 800px) {
+//   .mainContent {
+//     &__container {
+//       padding-top: 20%;
+//     }
+//   }
+// }
+// @media (max-width: 576px) and (max-height: 700px) {
+//   .mainContent {
+//     &__container {
+//       padding-top: 10%;
+//     }
+//   }
+// }
+// @media (max-width: 576px) and (max-height: 640px) {
+//   .mainContent {
+//     &__container {
+//       padding-top: 0;
+//     }
+//   }
+// }
+
+@media (max-width: 576px) {
+  .mainContent {
+    &__container {
+      padding-top: clamp(0%, calc((100vh - 640px) * (50 / 460)), 50%);
+    }
+    &__gameInfo {
+      width: 100%;
+      transform: none;
+      position: relative;
+      margin-bottom: clamp(0px, calc((100vh - 640px) * (32 / 460)), 32px);
+    }
+    &__gameInfoShadow {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: -4vw;
+      z-index: -1;
+      width: 100vw;
+      height: auto;
+    }
+    &__game {
+      width: 100%;
+      height: 54dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+    }
+    &__btn {
+      inline-size: 86%;
+      block-size: 52px;
+      font-size: 18px;
+      margin-top: clamp(8px, calc((100vh - 640px) * (80 / 460)), 80px);
+    }
+  }
+}

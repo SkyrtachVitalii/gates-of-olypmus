@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#14141a" />
+    <meta
+      name="theme-color"
+      content="#14141a"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#14141a"
+      media="(prefers-color-scheme: dark)"
+    />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <meta name="msapplication-navbutton-color" content="#14141a" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="./img/icon.ico" />
+    <script>
+      document.documentElement.classList.add("app-preparing");
+    </script>
+    <link rel="stylesheet" href="css/style.css" />
+    <title data-translate="title">Try your luck in Olympus</title>
+  </head>
+  <body
+    style="
+      padding-top: constant(safe-area-inset-top);
+      padding-left: constant(safe-area-inset-left);
+      padding-right: constant(safe-area-inset-right);
+      padding-bottom: constant(safe-area-inset-bottom);
+      padding-top: env(safe-area-inset-top);
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+      padding-bottom: env(safe-area-inset-bottom);
+      background-color: #14141a;
+    "
+  >
+    <!-- <body> -->
+    <div class="mainContainer">
+      <picture>
+        <source
+          media="(max-width: 576px)"
+          srcset="
+            img/mainContainer/lightingBg_576_1x.webp 1x,
+            img/mainContainer/lightingBg_576_2x.webp 2x
+          "
+          type="image/webp"
+        />
+        <source
+          media="(max-width: 1366px)"
+          srcset="
+            img/mainContainer/lightingBg_1366_1x.webp 1x,
+            img/mainContainer/lightingBg_1366_2x.webp 2x
+          "
+          type="image/webp"
+        />
+        <source
+          media="(max-width: 1920px)"
+          srcset="
+            img/mainContainer/lightingBg_1920_1x.webp 1x,
+            img/mainContainer/lightingBg_1920_2x.webp 2x
+          "
+          type="image/webp"
+        />
+        <img
+          class="mainContainer__lighting mainContainer__lighting--1"
+          src="img/mainContainer/lightingBg_1920_1x.webp"
+          alt="Lighting 1"
+        />
+      </picture>
+      <picture>
+        <source
+          media="(max-width: 576px)"
+          srcset="
+            img/mainContainer/person_576_1x.webp 1x,
+            img/mainContainer/person_576_2x.webp 2x
+          "
+          type="image/webp"
+        />
+        <source
+          media="(max-width: 1920px)"
+          srcset="
+            img/mainContainer/person_1920_1x.webp 1x,
+            img/mainContainer/person_1920_2x.webp 2x
+          "
+          type="image/webp"
+        />
+        <img
+          class="mainContainer__person"
+          src="img/mainContainer/person_1920_1x.webp"
+          alt="Person"
+        />
+      </picture>
+      <picture>
+        <source
+          media="(max-width: 576px)"
+          srcset="
+            img/mainContainer/shadowBgTop_576_1x.webp 1x,
+            img/mainContainer/shadowBgTop_576_2x.webp 2x
+          "
+          type="image/webp"
+        />
+        <img
+          class="mainContainer__shadow mainContainer__shadow--top"
+          src="img/mainContainer/shadowBgTop_576_1x.webp"
+          alt="shadow"
+        />
+      </picture>
+      <picture>
+        <source
+          media="(max-width: 576px)"
+          srcset="
+            img/mainContainer/shadowBgBottom_576_1x.webp 1x,
+            img/mainContainer/shadowBgBottom_576_2x.webp 2x
+          "
+          type="image/webp"
+        />
+        <source
+          media="(max-width: 1366px)"
+          srcset="
+            img/mainContainer/shadowBgBottom_1366_1x.webp 1x,
+            img/mainContainer/shadowBgBottom_1366_2x.webp 2x
+          "
+          type="image/webp"
+        />
+        <source
+          media="(max-width: 1920px)"
+          srcset="
+            img/mainContainer/shadowBgBottom_1920_1x.webp 1x,
+            img/mainContainer/shadowBgBottom_1920_2x.webp 2x
+          "
+          type="image/webp"
+        />
+        <img
+          class="mainContainer__shadow mainContainer__shadow--bottom"
+          src="img/mainContainer/shadowBgBottom_1920_1x.webp"
+          alt="shadow"
+        />
+      </picture>
+      <div class="header">
+        <div class="header__content">
+          <div class="header__logo">
+            <img src="img/header/logo.svg" alt="" class="header__logoImg" />
+          </div>
+          <div class="header__navigation">
+            <div class="navigationWrapper">
+              <div class="navigation" tabindex="0">
+                <div class="navigation__mainBlock">
+                  <div class="navigation__item">
+                    <img
+                      src="img/header/flag_en.svg"
+                      alt="Eng"
+                      class="navigation__itemImg"
+                    />
+                    <span class="navigation__itemText">Eng</span>
+                  </div>
+                  <div class="navigation__arrow">
+                    <img
+                      class="navigation__arrowImg"
+                      src="img/header/arrow.svg"
+                      alt="Arrow"
+                    />
+                  </div>
+                </div>
+
+                <div id="lang" class="navigation__items">
+                  <div value="eng" class="navigation__item">
+                    <img
+                      src="img/header/flag_en.svg"
+                      alt="Eng"
+                      class="navigation__itemImg"
+                    />
+                    <span class="navigation__itemText">Eng</span>
+                  </div>
+                  <div value="por" class="navigation__item">
+                    <img
+                      src="img/header/flag_pt.svg"
+                      alt="Por"
+                      class="navigation__itemImg"
+                    />
+                    <span class="navigation__itemText">Por</span>
+                  </div>
+                  <div value="esp" class="navigation__item">
+                    <img
+                      src="img/header/flag_es.svg"
+                      alt="Esp"
+                      class="navigation__itemImg"
+                    />
+                    <span class="navigation__itemText">Esp</span>
+                  </div>
+                  <div value="fra" class="navigation__item">
+                    <img
+                      src="img/header/flag_fr.svg"
+                      alt="Fra"
+                      class="navigation__itemImg"
+                    />
+                    <span class="navigation__itemText">Fra</span>
+                  </div>
+                  <div value="nor" class="navigation__item">
+                    <img
+                      src="img/header/flag_nr.svg"
+                      alt="Nor"
+                      class="navigation__itemImg"
+                    />
+                    <span class="navigation__itemText">Nor</span>
+                  </div>
+                  <div value="suo" class="navigation__item">
+                    <img
+                      src="img/header/flag_suo.svg"
+                      alt="Suo"
+                      class="navigation__itemImg"
+                    />
+                    <span class="navigation__itemText">Suo</span>
+                  </div>
+                  <div value="deu" class="navigation__item">
+                    <img
+                      src="img/header/flag_deu.svg"
+                      alt="Deu"
+                      class="navigation__itemImg"
+                    />
+                    <span class="navigation__itemText">Deu</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mainContent">
+        <div class="mainContent__container">
+          <div class="mainContent__gameInfo">
+            <div class="mainContent__gameInfoContainer">
+              <div class="mainContent__gameInfoImg">
+                <picture>
+                  <source
+                    media="(max-width: 576px)"
+                    srcset="
+                      img/mainContainer/gameLogo_576_1x.webp 1x,
+                      img/mainContainer/gameLogo_576_2x.webp 2x
+                    "
+                    type="image/webp"
+                  />
+                  <source
+                    media="(max-width: 1366px)"
+                    srcset="
+                      img/mainContainer/gameLogo_1366_1x.webp 1x,
+                      img/mainContainer/gameLogo_1366_2x.webp 2x
+                    "
+                    type="image/webp"
+                  />
+                  <source
+                    media="(max-width: 1920px)"
+                    srcset="
+                      img/mainContainer/gameLogo_1920_1x.webp 1x,
+                      img/mainContainer/gameLogo_1920_2x.webp 2x
+                    "
+                    type="image/webp"
+                  />
+                  <img
+                    src="img/mainContainer/gameLogo_1920_1x.webp"
+                    alt="shadow"
+                  />
+                </picture>
+              </div>
+              <div class="mainContent__gameInfoText">
+                <span data-translate="langing-title">Try your luck in</span>
+                <span
+                  class="mainContent__gameInfoTextGameName"
+                  data-translate="landing-name"
+                  >Olympus</span
+                >
+              </div>
+            </div>
+            <picture>
+              <source
+                media="(max-width: 576px)"
+                srcset="
+                  img/mainContainer/shadow_mobile_title_1x.webp 1x,
+                  img/mainContainer/shadow_mobile_title_2x.webp 2x
+                "
+                type="image/webp"
+              />
+              <img
+                class="mainContent__gameInfoShadow"
+                src="img/mainContainer/shadow_mobile_title_1x.webp"
+                alt=""
+              />
+            </picture>
+          </div>
+          <div class="mainContent__game">
+            <div class="game">
+              <div class="game__pad">
+                <div class="game__container">
+                  <div class="game__col">
+                    <picture>
+                      <source
+                        srcset="
+                          img/mainContainer/col_success_1_1x.webp 1x,
+                          img/mainContainer/col_success_1_2x.webp 2x
+                        "
+                        type="image/webp"
+                      />
+                      <img
+                        class="game__colImg game__colImg--11"
+                        src="img/mainContainer/col_success_1_1x.webp"
+                        alt=""
+                      />
+                    </picture>
+                    <picture>
+                      <source
+                        srcset="
+                          img/mainContainer/col_start_1_1x.webp 1x,
+                          img/mainContainer/col_start_1_2x.webp 2x
+                        "
+                        type="image/webp"
+                      />
+                      <img
+                        class="game__colImg game__colImg--1"
+                        src="img/mainContainer/col_start_1_1x.webp"
+                        alt=""
+                      />
+                    </picture>
+                  </div>
+
+                  <div class="game__col">
+                    <picture>
+                      <source
+                        srcset="
+                          img/mainContainer/col_success_2_1x.webp 1x,
+                          img/mainContainer/col_success_2_2x.webp 2x
+                        "
+                        type="image/webp"
+                      />
+                      <img
+                        class="game__colImg game__colImg--22"
+                        src="img/mainContainer/col_success_2_1x.webp"
+                        alt=""
+                      />
+                    </picture>
+                    <picture>
+                      <source
+                        srcset="
+                          img/mainContainer/col_start_2_1x.webp 1x,
+                          img/mainContainer/col_start_2_2x.webp 2x
+                        "
+                        type="image/webp"
+                      />
+                      <img
+                        class="game__colImg game__colImg--2"
+                        src="img/mainContainer/col_start_2_1x.webp"
+                        alt=""
+                      />
+                    </picture>
+                  </div>
+
+                  <div class="game__col">
+                    <picture>
+                      <source
+                        srcset="
+                          img/mainContainer/col_success_3_1x.webp 1x,
+                          img/mainContainer/col_success_3_2x.webp 2x
+                        "
+                        type="image/webp"
+                      />
+                      <img
+                        class="game__colImg game__colImg--33"
+                        src="img/mainContainer/col_success_3_1x.webp"
+                        alt=""
+                      />
+                    </picture>
+                    <picture>
+                      <source
+                        srcset="
+                          img/mainContainer/col_start_3_1x.webp 1x,
+                          img/mainContainer/col_start_3_2x.webp 2x
+                        "
+                        type="image/webp"
+                      />
+                      <img
+                        class="game__colImg game__colImg--3"
+                        src="img/mainContainer/col_start_3_1x.webp"
+                        alt=""
+                      />
+                    </picture>
+                  </div>
+
+                  <div class="game__col">
+                    <picture>
+                      <source
+                        srcset="
+                          img/mainContainer/col_success_4_1x.webp 1x,
+                          img/mainContainer/col_success_4_2x.webp 2x
+                        "
+                        type="image/webp"
+                      />
+                      <img
+                        class="game__colImg game__colImg--44"
+                        src="img/mainContainer/col_success_4_1x.webp"
+                        alt=""
+                      />
+                    </picture>
+                    <picture>
+                      <source
+                        srcset="
+                          img/mainContainer/col_start_4_1x.webp 1x,
+                          img/mainContainer/col_start_4_2x.webp 2x
+                        "
+                        type="image/webp"
+                      />
+                      <img
+                        class="game__colImg game__colImg--4"
+                        src="img/mainContainer/col_start_4_1x.webp"
+                        alt=""
+                      />
+                    </picture>
+                  </div>
+
+                  <div class="game__col">
+                    <picture>
+                      <source
+                        srcset="
+                          img/mainContainer/col_success_5_1x.webp 1x,
+                          img/mainContainer/col_success_5_2x.webp 2x
+                        "
+                        type="image/webp"
+                      />
+                      <img
+                        class="game__colImg game__colImg--55"
+                        src="img/mainContainer/col_success_5_1x.webp"
+                        alt=""
+                      />
+                    </picture>
+                    <picture>
+                      <source
+                        srcset="
+                          img/mainContainer/col_start_5_1x.webp 1x,
+                          img/mainContainer/col_start_5_2x.webp 2x
+                        "
+                        type="image/webp"
+                      />
+                      <img
+                        class="game__colImg game__colImg--5"
+                        src="img/mainContainer/col_start_5_1x.webp"
+                        alt=""
+                      />
+                    </picture>
+                  </div>
+
+                  <div class="game__col">
+                    <picture>
+                      <source
+                        srcset="
+                          img/mainContainer/col_success_6_1x.webp 1x,
+                          img/mainContainer/col_success_6_2x.webp 2x
+                        "
+                        type="image/webp"
+                      />
+                      <img
+                        class="game__colImg game__colImg--66"
+                        src="img/mainContainer/col_success_6_1x.webp"
+                        alt=""
+                      />
+                    </picture>
+                    <picture>
+                      <source
+                        srcset="
+                          img/mainContainer/col_start_6_1x.webp 1x,
+                          img/mainContainer/col_start_6_2x.webp 2x
+                        "
+                        type="image/webp"
+                      />
+                      <img
+                        class="game__colImg game__colImg--6"
+                        src="img/mainContainer/col_start_6_1x.webp"
+                        alt=""
+                      />
+                    </picture>
+                  </div>
+
+                  <picture>
+                    <source
+                      srcset="
+                        img/mainContainer/gameWinSector_1x.webp 1x,
+                        img/mainContainer/gameWinSector_2x.webp 2x
+                      "
+                      type="image/webp"
+                    />
+                    <img
+                      class="game__winSector"
+                      src="img/mainContainer/gameWinSector_1x.webp"
+                      alt=""
+                    />
+                  </picture>
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              href="#"
+              class="mainContent__btn"
+              data-translate="landing-btn"
+            >
+              spin the slot
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="footer__container">
+          <div class="footer__items"></div>
+        </div>
+      </div>
+      <div
+        id="popup"
+        class="popup"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="popup-title"
+      >
+        <div class="popup__overlay"></div>
+
+        <div class="popup__dialog" role="document">
+          <div class="popup__content">
+            <div class="popup__title" data-translate="landing-popup-title">
+              Big Win
+            </div>
+            <div
+              class="popup__subtitle"
+              data-translate="landing-popup-subtitle"
+            >
+              You have got up to
+            </div>
+            <div class="popup__price">3000 USDT + 165 FS</div>
+            <a
+              href="https://claps.com/?from=header-desktop&page-in-modal=%2Fshort-register-modal%2F"
+              class="popup__btn"
+              data-translate="landing-popup-btn"
+              >claim bonus</a
+            >
+          </div>
+          <picture>
+            <source
+              media="(max-width: 576px)"
+              srcset="
+                img/mainContainer/lighting_popup_mobile_1_1x.webp 1x,
+                img/mainContainer/lighting_popup_mobile_1_2x.webp 2x
+              "
+              type="image/webp"
+            />
+            <source
+              media="(min-width: 577px)"
+              srcset="
+                img/mainContainer/lighting_popup_desktop_1_1x.webp 1x,
+                img/mainContainer/lighting_popup_desktop_1_2x.webp 2x
+              "
+              type="image/webp"
+            />
+            <img
+              src="img/mainContainer/lighting_popup_desktop_1_1x.webp"
+              alt=""
+              class="popup__lighting popup__lighting--1"
+            />
+          </picture>
+          <picture>
+            <source
+              media="max-width: 576px"
+              srcset="
+                img/mainContainer/lighting_popup_mobile_2_1x.webp 1x,
+                img/mainContainer/lighting_popup_mobile_2_2x.webp 2x
+              "
+              type="image/webp"
+            />
+            <source
+              media="min-width: 577px"
+              srcset="
+                img/mainContainer/lighting_popup_desktop_2_1x.webp 1x,
+                img/mainContainer/lighting_popup_desktop_2_2x.webp 2x
+              "
+              type="image/webp"
+            />
+            <img
+              src="img/mainContainer/lighting_popup_desktop_2_1x.webp"
+              alt=""
+              class="popup__lighting popup__lighting--2"
+            />
+          </picture>
+          <picture>
+            <source
+              media="max-width: 576px"
+              srcset="
+                img/mainContainer/person_popup_360_1x.webp 1x,
+                img/mainContainer/person_popup_360_2x.webp 2x
+              "
+              type="image/webp"
+            />
+            <source
+              media="min-width: 577px"
+              srcset="
+                img/mainContainer/person_popup_1920_1x.webp 1x,
+                img/mainContainer/person_popup_1920_2x.webp 2x
+              "
+              type="image/webp"
+            />
+            <img
+              src="img/mainContainer/person_popup_1920_1x.webp"
+              alt=""
+              class="popup__personImg"
+            />
+          </picture>
+          <picture>
+            <source
+              srcset="
+                img/mainContainer/shadow_bg_popup_desktop_1x.webp 1x,
+                img/mainContainer/shadow_bg_popup_desktop_2x.webp 2x
+              "
+              type="image/webp"
+            />
+            <img
+              src="img/mainContainer/shadow_bg_popup_desktop_1x.webp"
+              alt=""
+              class="popup__bottomShadow"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+    <script src="./js/main.iife.js" defer></script>
+  </body>
+</html>

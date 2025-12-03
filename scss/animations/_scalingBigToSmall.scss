@@ -1,0 +1,4 @@
+  @keyframes scalingBigToSmall {
+    from { transform: scale(1); }
+    to   { transform: scale(0.94); } /* м’який “пульс” */
+  }

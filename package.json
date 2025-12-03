@@ -1,0 +1,19 @@
+{
+  "name": "olympus",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "node build.js --prod",
+    "dev": "node build.js --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "esbuild": "^0.25.10",
+    "postcss": "^8.5.6",
+    "postcss-value-parser": "^4.2.0"
+  },
+  "description": ""
+}

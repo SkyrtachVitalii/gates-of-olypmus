@@ -1,0 +1,360 @@
+@use "sass:math";
+@use "../animations/person-popupmoving";
+@use "../animations/scalingBigToSmall";
+
+$popup-z: 1100;
+$bg-overlay: rgba(0, 0, 0, 0.48);
+$fg: #eaeef6;
+$accent: #e5ff3a;
+$popup-ratio: math.div(740, 458);
+
+.popup {
+  position: fixed;
+  inset: 0;
+  z-index: $popup-z;
+  display: grid;
+  grid-template-areas: "stack";
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+
+  &__overlay {
+    grid-area: stack;
+    background: $bg-overlay;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+
+  &__dialog {
+    position: relative;
+    grid-area: stack;
+    place-self: center;
+    inline-size: 739px;
+    aspect-ratio: $popup-ratio;
+    font-size: clamp(12px, 1vw, 18px);
+    color: $fg;
+    background-color: #0d1117;
+    border-radius: 20px;
+    background-clip: padding-box;
+
+    box-shadow: 0 10px 100px rgba(229, 255, 58, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+    box-shadow: 0 10px 100px 0 rgba(229, 255, 58, 0.5);
+    overflow: hidden;
+
+    transform: translateY(12px) scale(0.98);
+    opacity: 0;
+    transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1),
+      opacity 0.28s ease;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: image-set(
+        url("/img/mainContainer/bg_popup_desktop_1x.webp") 1x,
+        url("/img/mainContainer/bg_popup_desktop_2x.webp") 2x
+      );
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      pointer-events: none;
+      border-radius: inherit;
+      overflow: hidden;
+      pointer-events: none;
+    }
+  }
+
+  &__lighting {
+    position: absolute;
+    top: 0;
+    inline-size: 100%;
+    height: auto;
+    z-index: 1001;
+    animation: lighting 10s linear infinite;
+
+    &--1 {
+      right: 0;
+    }
+    &--2 {
+      left: 0;
+      animation-delay: 2s;
+    }
+  }
+
+  &__content {
+    position: absolute;
+    top: 50%;
+    right: 8%;
+    transform: translateY(-50%);
+    inline-size: clamp(38%, 48%, 54%);
+    font-family: "Sofia Sans", system-ui, sans-serif;
+    z-index: 1005;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+  }
+
+  &__title {
+    color: #fff;
+    text-align: center;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 32px;
+    line-height: 1.05;
+    margin-bottom: clamp(0.1em, 0.05em, 0.35em);
+  }
+
+  &__subtitle {
+    color: #fff;
+    text-align: center;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 18px;
+
+    line-height: 1.1;
+    margin-bottom: clamp(0.6em, 1.1em, 1.4em);
+  }
+
+  &__price {
+    text-align: center;
+    font-weight: 900;
+    text-transform: uppercase;
+    background: linear-gradient(91deg, #f0b241 49.38%, #ffe7a6 75.18%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 32px;
+    line-height: 1.05;
+    margin-bottom: 1.4em;
+  }
+
+  &__btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+
+    padding: 22px 16px;
+    align-self: stretch;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid $accent;
+    background: $accent;
+    color: #2a2e0a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1;
+    white-space: nowrap;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    animation: scalingBigToSmall 1s linear infinite alternate;
+    will-change: transform; /* підказка браузеру для кращої продуктивності */
+    &:hover {
+      transform: scale(1.06);
+    }
+    &:not(:hover) {
+      transform: scale(1);
+    }
+    &:active {
+      background: #d1ec26;
+      color: #14141a;
+    }
+    &:not(:active) {
+      transform: scale(1);
+    }
+  }
+
+  &__personImg {
+    position: absolute;
+    inline-size: 49%;
+    height: auto;
+    top: 11%;
+    left: -2.5%;
+    z-index: 1002;
+    animation: person-popupmoving 4s linear infinite;
+    pointer-events: none;
+  }
+
+  &__bottomShadow {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    inline-size: 100%;
+    outline: none;
+    block-size: clamp(18%, 24%, 30%);
+    z-index: 1003;
+    pointer-events: none;
+  }
+  &.is-open {
+    opacity: 1;
+    pointer-events: auto;
+
+    .popup__dialog {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  $popup-ratio: math.div(328, 532);
+  .popup {
+    position: fixed;
+    inset: 0;
+    z-index: $popup-z;
+    display: grid;
+    grid-template-areas: "stack";
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    &__overlay {
+      grid-area: stack;
+      background: $bg-overlay;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+
+    &__dialog {
+      width: 328px;
+      height: 532px;
+
+      font-size: clamp(12px, 1vw, 18px);
+
+      background-image: image-set(
+        url("/img/mainContainer/bg_popup_mobile_1x.webp") 1x,
+        url("/img/mainContainer/bg_popup_mobile_2x.webp") 2x
+      );
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-color: #0d1117;
+      border-radius: 20px;
+      background-clip: padding-box;
+
+      box-shadow: 0 10px 100px rgba(229, 255, 58, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+      box-shadow: 0 10px 100px 0 rgba(229, 255, 58, 0.5);
+      overflow: hidden;
+
+      transform: translateY(12px) scale(0.98);
+      opacity: 0;
+      transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1),
+        opacity 0.28s ease;
+
+      &::after {
+        content: "";
+        background-image: image-set(
+          url("/img/mainContainer/shadow_bg_top_popup_mobile_1x.webp") 1x,
+          url("/img/mainContainer/shadow_bg_top_popup_mobile_2x.webp") 2x
+        );
+        height: 140px;
+        width: 328px;
+      }
+      &::before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: -5px;
+        z-index: 1003;
+        background-image: image-set(
+          url("/img/mainContainer/shadow_bg_popup_mobile_1x.webp") 1x,
+          url("/img/mainContainer/shadow_bg_popup_mobile_2x.webp") 2x
+        );
+        width: 334px;
+        height: 346px;
+      }
+    }
+
+    &__lighting {
+      position: absolute;
+      top: 0;
+      inline-size: 100%;
+      height: auto;
+      z-index: 1001;
+      &--1 {
+        left: 0;
+        width: 328px;
+        height: 532px;
+      }
+      &--2 {
+        display: none;
+        right: 0;
+        animation-delay: 2s;
+      }
+    }
+
+    &__content {
+      position: absolute;
+      top: 72%;
+      right: 0%;
+
+      inline-size: 100%;
+      padding-inline: 12px;
+      font-family: "Sofia Sans", system-ui, sans-serif;
+      z-index: 1005;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__title {
+      font-size: 32px;
+      margin-bottom: 0;
+    }
+
+    &__subtitle {
+      font-size: 18px;
+      margin-bottom: 1em;
+    }
+
+    &__price {
+      font-size: 32px;
+      margin-bottom: 1em;
+    }
+
+    &__btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5em;
+
+      padding-inline: clamp(2em, 5.2em, 6.2em);
+      padding-block: clamp(1em, 1.2em, 1.2em);
+      align-self: stretch;
+      text-align: center;
+      border-radius: 8px;
+      border: 1px solid $accent;
+      background: $accent;
+      color: #2a2e0a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 900;
+      font-size: clamp(0.9em, 1.2em, 1.35em);
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    &__personImg {
+      width: 303px;
+      aspect-ratio: 82/121;
+      top: 10%;
+      left: 7%;
+    }
+
+    &__bottomShadow {
+      position: absolute;
+      inset-inline: 0;
+      bottom: 0;
+      inline-size: 100%;
+      block-size: clamp(18%, 24%, 30%);
+      z-index: 1003;
+      pointer-events: none;
+    }
+  }
+}

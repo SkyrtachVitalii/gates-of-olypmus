@@ -1,0 +1,197 @@
+@use "../animations/fade-in";
+@use "../animations/dropDownUp";
+@use "../animations/dropDownDown";
+
+.game {
+  background-image: image-set(
+    url("/img/mainContainer/gameBg_1x.webp") 1x,
+    url("/img/mainContainer/gameBg_2x.webp") 2x
+  );
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  inline-size: clamp(577px, 44vw, 844.601px);
+  aspect-ratio: 259 / 170;
+  // block-size: auto;
+  z-index: 10;
+
+  --vw-freeze-1100: calc(max(100vw, 1100px) / 100);
+
+  padding-block: clamp(14px, calc(3.083 * var(--vw-freeze-1100)), 40px);
+  padding-inline: clamp(12px, calc(1.667 * var(--vw-freeze-1100)), 32px);
+  font-size: clamp(12px, calc(1 * var(--vw-freeze-1100)), 18px);
+
+  --spin-dur: 1s;
+  --drop-dur: 0.35s;
+  --gap: 0.06s;
+  position: relative;
+  &__pad {
+    /* новий внутрішній шар замість padding у .game */
+    position: absolute;
+    inset: 0;
+    padding-block: clamp(14px, calc(3.083 * var(--vw-freeze-1100)), 40px);
+    padding-inline: clamp(12px, calc(1.667 * var(--vw-freeze-1100)), 32px);
+    font-size: clamp(12px, calc(1 * var(--vw-freeze-1100)), 18px);
+
+    display: grid; /* або просто обгортка для твого .game__container */
+  }
+
+  &__container {
+    position: relative;
+    inline-size: 100%;
+    block-size: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  &__col {
+    position: relative;
+    padding-inline: clamp(6px, calc(0.833 * var(--vw-freeze-1100)), 16px);
+  }
+
+  &__colImg {
+    display: block;
+    margin: 0 auto;
+    will-change: transform, opacity;
+
+    inline-size: clamp(68%, 80%, 86%);
+    block-size: clamp(88%, 96.5%, 98%);
+    object-fit: contain;
+
+    &--11,
+    &--22,
+    &--33,
+    &--44,
+    &--55,
+    &--66 {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -230%);
+    }
+  }
+
+  &__col:nth-child(1) {
+    --col-stagger: 0ms;
+  }
+  &__col:nth-child(2) {
+    --col-stagger: 60ms;
+  }
+  &__col:nth-child(3) {
+    --col-stagger: 120ms;
+  }
+  &__col:nth-child(4) {
+    --col-stagger: 180ms;
+  }
+  &__col:nth-child(5) {
+    --col-stagger: 240ms;
+  }
+  &__col:nth-child(6) {
+    --col-stagger: 300ms;
+  }
+
+  &.is-spun {
+    .game__col {
+      .game__colImg--1,
+      .game__colImg--2,
+      .game__colImg--3,
+      .game__colImg--4,
+      .game__colImg--5,
+      .game__colImg--6 {
+        animation: dropDownDown var(--spin-dur) linear forwards;
+        animation-delay: var(--col-stagger, 0ms);
+      }
+
+      .game__colImg--11,
+      .game__colImg--22,
+      .game__colImg--33,
+      .game__colImg--44,
+      .game__colImg--55,
+      .game__colImg--66 {
+        animation: dropDownUp var(--drop-dur) cubic-bezier(0.2, 0.7, 0.2, 1)
+          forwards;
+        animation-delay: calc(
+          var(--col-stagger, 0ms) + var(--spin-dur) + var(--gap)
+        );
+      }
+    }
+  }
+
+  &__winSector {
+    display: none;
+    position: absolute;
+    z-index: 15;
+    top: -4%;
+    left: -1%;
+    inline-size: 71%;
+    block-size: 67.4%;
+    animation: fade-in 2s linear 0s 1 both;
+    pointer-events: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .game {
+    inline-size: 100svw;
+    aspect-ratio: 195 / 128;
+    block-size: auto;
+    padding: 0;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    container-type: size;
+    width: 100%;
+
+    padding-block: clamp(4px, 4.083cqw, 12px);
+    padding-inline: clamp(4px, 1.667cqw, 10px);
+    font-size: clamp(10px, 1cqw, 12px);
+
+    &__pad {
+      padding-inline: 12px;
+      padding-block: clamp(8px, 10.21cqh, 32px) clamp(8px, 9.75cqh, 36px);
+    }
+
+    &__container {
+      display: grid;
+      align-content: center;
+    }
+
+    &__col {
+      padding-inline: clamp(2px, 1.833cqw, 8px);
+    }
+
+    &__colImg {
+      max-inline-size: 100%;
+      max-block-size: 100%;
+      inline-size: clamp(68%, 80%, 86%);
+      block-size: clamp(88%, 96.5%, 98%);
+      object-fit: contain;
+    }
+
+    &__winSector {
+      top: -3%;
+      left: -1%;
+      inline-size: 71%;
+      block-size: 64.4%;
+    }
+  }
+
+  @supports not (width: 1cqw) {
+    .game {
+      padding-block: 7px;
+      padding-inline: 6px;
+      font-size: 12px;
+    }
+    .game__col {
+      padding-inline: 6px;
+    }
+    @supports not (width: 1cqw) {
+      .game__container {
+        padding-block: clamp(8px, 6.05cqw, 32px) clamp(8px, 6.39cqw, 36px);
+      }
+    }
+  }
+}

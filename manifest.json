@@ -1,0 +1,27 @@
+{
+  "name": "Gates of Olympus",
+  "short_name": "Olympus",
+  "description": "Claps crypto casino – Gates of Olympus",
+  "start_url": "/minio/landing/gates-of-olympus/index.html",
+  "scope": "/minio/landing/gates-of-olympus/",
+  "display": "standalone",
+  "background_color": "#14141a",
+  "theme_color": "#14141a",
+  "icons": [
+    {
+      "src": "/minio/landing/gates-of-olympus/img/144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "/minio/landing/gates-of-olympus/img/192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/minio/landing/gates-of-olympus/img/144.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

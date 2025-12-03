@@ -1,0 +1,161 @@
+$nav-w: 103px;
+$nav-h: 34px;
+$nav-bg: rgba(24, 25, 33, 0.8);
+$nav-radius: 100px;
+
+$items-w: 106px;
+$items-gap: 11px;
+$items-pad: 5px;
+$items-radius: 6px;
+$items-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+
+$tr-fast: 0.28s ease;
+$tr-med: 0.4s ease;
+
+// ------------------------------
+
+.navigationWrapper {
+  position: relative;
+  z-index: 1200;
+  display: inline-block;
+}
+
+.navigation {
+  position: relative;
+  width: $nav-w;
+  height: $nav-h;
+  border-radius: $nav-radius;
+  background: $nav-bg;
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; top: 100%;
+    height: 10px;
+    z-index: 1; // "місток" для курсора
+  }
+
+  // --- основний блок у шапці
+  &__mainBlock {
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 11px;
+    align-self: stretch;
+  }
+
+  // --- елемент списку
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      &:hover .navigation__itemText {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // --- іконка мови
+  &__itemImg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  // --- стрілка
+  &__arrow {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__arrowImg {
+    transition: transform 0.4s ease;
+  }
+
+  // --- випадаючий список
+  &__items {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: $items-w;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: $items-pad;
+    gap: $items-gap;
+    border-radius: $items-radius;
+    background: $nav-bg;
+    box-shadow: $items-shadow;
+    z-index: 10;
+
+    // базово — закрито
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+    transform-origin: top;
+    pointer-events: none;
+    overflow: hidden;
+    max-height: 0;
+
+    transition:
+      opacity $tr-fast,
+      transform $tr-fast,
+      max-height $tr-med;
+
+    // елементи з [hidden] приховуємо повністю
+    [hidden] { display: none !important; }
+  }
+
+  // --- відкрито (універсально: мобайл + десктоп)
+  &.is-open {
+    .navigation__items {
+      opacity: 1;
+      transform: translateY(3px) scale(1);
+      pointer-events: auto;
+      max-height: 600px;
+    }
+    .navigation__arrowImg {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// ------------------------------
+// Десктопна поведінка (є курсор):
+// дозволяємо відкриття по :hover / :focus-within
+@media (hover: hover) and (pointer: fine) {
+  .navigation {
+    &:hover .navigation__items,
+    &:focus-within .navigation__items {
+      opacity: 1;
+      transform: translateY(3px) scale(1);
+      pointer-events: auto;
+      max-height: 600px;
+    }
+
+    &:hover .navigation__arrowImg,
+    &:focus-within .navigation__arrowImg {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// ------------------------------
+// Опційно: зменшення анімацій для користувачів із reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .navigation {
+    &__arrowImg { transition: none; }
+    &__items { transition: none; }
+  }
+}

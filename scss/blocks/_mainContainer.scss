@@ -1,0 +1,154 @@
+@use "../animations/lighting";
+@use "../animations/person-moving";
+
+:root {
+  /* можна підкрутити межі clamp — це «трохи зверху і знизу» */
+  --person-vpad: clamp(24px, 5.3vh, 56px);
+}
+
+.mainContainer {
+  width: 100vw;
+  height: 100dvh;
+  padding-inline: clamp(16px, calc(16px + (64 * (100vw - 360px) / 1560)), 80px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-image: image-set(
+    url("/img/mainContainer/bg_1920_1x.webp") 1x,
+    url("/img/mainContainer/bg_1920_2x.webp") 2x
+  );
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  position: relative;
+  color: #fff;
+  font-family: "Sofia Sans", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  // padding-top: constant(safe-area-inset-top);
+  // padding-left: constant(safe-area-inset-left);
+  // padding-right: constant(safe-area-inset-right);
+  // padding-bottom: constant(safe-area-inset-bottom);
+  // padding-top: env(safe-area-inset-top);
+  // padding-left: env(safe-area-inset-left);
+  // padding-right: env(safe-area-inset-right);
+  // padding-bottom: env(safe-area-inset-bottom);
+  &__lighting {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 2;
+    animation: lighting 12s linear 0s infinite normal both;
+    &--1 {
+    }
+  }
+  &__person {
+    position: absolute;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    animation: person-moving 4s linear 0s infinite normal both;
+    z-index: 2;
+
+    /* ключові рядки: висота від вʼюпорта, ширина авто */
+    height: calc(100dvh - (var(--person-vpad) * 2));
+    width: auto; /* зберігає пропорції */
+    max-height: calc(100dvh - (var(--person-vpad) * 2));
+    /* необовʼязково: щоб не «розпирало» надто широко на дуже високих вікнах */
+    max-width: 45vw;
+  }
+  &__shadow {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    &--top {
+      top: 0;
+      display: none;
+    }
+    &--bottom {
+      bottom: 0;
+      z-index: 2;
+    }
+  }
+}
+
+@media (max-width: 1366px) {
+  .mainContainer {
+    background-image: image-set(
+      url("/img/mainContainer/bg_1366_1x.webp") 1x,
+      url("/img/mainContainer/bg_1366_2x.webp") 2x
+    );
+  }
+}
+@media (max-width: 1023px) {
+  .mainContainer {
+    &__person {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: calc(100dvh - (var(--person-vpad) * 2));
+      width: auto;
+      max-width: 68vw;
+    }
+  }
+}
+@media (max-width: 576px) {
+  .mainContainer {
+    background-image: image-set(
+      url("/img/mainContainer/bg_576_1x.webp") 1x,
+      url("/img/mainContainer/bg_576_2x.webp") 2x
+    );
+    &__lighting {
+      position: absolute;
+      left: 8%;
+      &--1 {
+      }
+    }
+    &__person {
+      // top: clamp(
+      //   280px,
+      //   calc(280px + ((100vw - 360px) / 6) + ((100dvh - 612px) * 0.1391752577)),
+      //   370px
+      // );
+      // right: 0;
+      // left: initial;
+      // transform: translateY(-50%);
+      // width: 55vw;
+      position: absolute;
+      /* прилипання праворуч */
+      right: 0;
+      left: auto;
+
+      /* вертикальний центр (можеш змістити, якщо треба) */
+      top: 48%;
+      transform: translateY(-50%);
+
+      /* керуємо висотою від вʼюпорта з відступами */
+      height: calc(100dvh - (var(--person-vpad) * 2) - 4dvh);
+      width: auto; /* зберігає пропорції */
+      max-height: calc(100dvh - (var(--person-vpad) * 2) - 4dvh);
+
+      /* щоб не виходила за край екрана по ширині */
+      max-width: 90vw;
+
+      /* object-fit не обовʼязковий, але не завадить */
+      object-fit: contain;
+    }
+    &__shadow {
+      &--top {
+        display: block;
+        height: 44dvh;
+        width: 100%;
+      }
+    }
+  }
+}

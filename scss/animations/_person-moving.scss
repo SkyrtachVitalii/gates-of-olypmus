@@ -1,0 +1,14 @@
+@keyframes person-moving {
+  0% {
+    transform: translateY(-50%);
+  }
+  25% {
+    transform: translateY(calc(-50% - 6px));
+  }
+  75% {
+    transform: translateY(calc(-50% + 12px));
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
