@@ -9,10 +9,10 @@ btn?.addEventListener("click", (e) => {
   e.preventDefault();
 
   // якщо вже крутили — тільки попап
-  // if (localStorage.getItem("game-spun") === "true") {
-  //   openPopup();
-  //   return;
-  // }
+  if (localStorage.getItem("game-spun") === "true") {
+    openPopup();
+    return;
+  }
 
   // одноразовий запуск
   if (game.classList.contains("is-spun")) return;
@@ -44,12 +44,12 @@ btn?.addEventListener("click", (e) => {
 });
 
   // 4) Якщо вже крутили — одразу сигналізуємо (без залежності від popup.js)
-  // if (localStorage.getItem("game-spun") === "true") {
-  //   btn?.setAttribute("aria-disabled", "true");
-  //   btn?.setAttribute("disabled", "");
-  //   requestAnimationFrame(() =>
-  //     document.dispatchEvent(new CustomEvent("slot:bigwin"))
-  //   );
-  // }
+  if (localStorage.getItem("game-spun") === "true") {
+    btn?.setAttribute("aria-disabled", "true");
+    btn?.setAttribute("disabled", "");
+    requestAnimationFrame(() =>
+      document.dispatchEvent(new CustomEvent("slot:bigwin"))
+    );
+  }
 }
 
