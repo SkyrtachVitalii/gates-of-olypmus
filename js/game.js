@@ -9,10 +9,10 @@ btn?.addEventListener("click", (e) => {
   e.preventDefault();
 
   // якщо вже крутили — тільки попап
-  if (localStorage.getItem("game-spun") === "true") {
-    openPopup();
-    return;
-  }
+  // if (localStorage.getItem("game-spun") === "true") {
+  //   openPopup();
+  //   return;
+  // }
 
   // одноразовий запуск
   if (game.classList.contains("is-spun")) return;
