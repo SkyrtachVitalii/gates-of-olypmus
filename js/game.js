@@ -44,12 +44,12 @@ btn?.addEventListener("click", (e) => {
 });
 
   // 4) Якщо вже крутили — одразу сигналізуємо (без залежності від popup.js)
-  if (localStorage.getItem("game-spun") === "true") {
-    btn?.setAttribute("aria-disabled", "true");
-    btn?.setAttribute("disabled", "");
-    requestAnimationFrame(() =>
-      document.dispatchEvent(new CustomEvent("slot:bigwin"))
-    );
-  }
+  // if (localStorage.getItem("game-spun") === "true") {
+  //   btn?.setAttribute("aria-disabled", "true");
+  //   btn?.setAttribute("disabled", "");
+  //   requestAnimationFrame(() =>
+  //     document.dispatchEvent(new CustomEvent("slot:bigwin"))
+  //   );
+  // }
 }
 
