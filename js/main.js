@@ -84,7 +84,7 @@ async function bootstrap() {
   await waitNextFrame();
 
   // 🟢 тимчасовий "dev hack" - видалити перед віддачею на прод
-  // localStorage.setItem("game-spun", "false");
+  localStorage.setItem("game-spun", "false");
 
   // Гра: публічний інтерфейс ініціалізації.
   // Деталі реалізації приховані в модулі `game.js`.
